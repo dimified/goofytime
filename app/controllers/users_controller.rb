@@ -82,4 +82,13 @@ class UsersController < ApplicationController
       format.json { head :ok }
     end
   end
+  
+  # DETACH photo
+  def deletephoto
+  	@user = User.find(params[:temp])
+  	@user.photo = nil
+  	@user.save
+  	
+  	redirect_to user_path(params[:temp])
+  end
 end
