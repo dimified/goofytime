@@ -58,7 +58,7 @@ Daniel Krenmayr, Dimitri Reifschneider
           <% end %>  
           
           <% if @user_photo.to_s.include? "missing" %>
-            <div id="defaultPictureSmall"></div>
+            <span class="defaultPictureSmall"></span>
           <% else %>
             <%= link_to (image_tag @user_photo.url(:thumb), :class => 'attending_image_leader'), user_path(@user_id, :user_id => @user_id) %>
           <% end %>
@@ -72,7 +72,11 @@ Daniel Krenmayr, Dimitri Reifschneider
             @attending_user_photo = User.find(@attending_user_id).photo
             %>
             
-            <%= link_to (image_tag @attending_user_photo.url(:thumb), :class => 'attending_image'), user_path(@attending_user_id, :user_id => @attending_user_id) %>
+            <% if @user_photo.to_s.include? "missing" %>
+              <span class="defaultPictureSmallWithoutBorder"></span>
+            <% else %>
+              <%= link_to (image_tag @attending_user_photo.url(:thumb), :class => 'attending_image'), user_path(@attending_user_id, :user_id => @attending_user_id) %>
+            <% end %>
             
             <% end %>
           <% end %>
