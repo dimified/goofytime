@@ -112,7 +112,7 @@ a:hover {
 	text-decoration: underline;
 }
 
-.attending_image, .attending_image_leader {
+.attending_image {
   border: 2px solid #f6fbff;
 }
 
@@ -333,12 +333,16 @@ a:hover {
 	margin-top: -10px;
 }
 
-#defaultPictureSmall {
+.defaultPictureSmall, .defaultPictureSmallWithoutBorder {
 	float: left;
 	background: url('/assets/default_photo_30x30.jpg') no-repeat;
 	width: 30px;
 	height: 30px;
 	border: solid 2px #57a9ba;
+}
+
+.defaultPictureSmallWithoutBorder {
+	border: 2px solid #f6fbff;
 }
 
 #showUserInformation {
