@@ -10,6 +10,9 @@ gem 'jquery_datepicker'
 
 gem 'will_paginate', '~> 3.0'
 
+gem 'paperclip'
+gem 'rmagick'
+
 # Bundle edge Rails instead:
 # gem 'rails',     :git => 'git://github.com/rails/rails.git'
 
