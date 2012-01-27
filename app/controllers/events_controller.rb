@@ -1,3 +1,8 @@
+# Fachhochschule Salzburg
+# MultimediaTechnology B 2010
+# Basisqualifikationsprojekt 2a
+# Daniel Krenmayr, Dimitri Reifschneider
+
 class EventsController < ApplicationController
   # GET /events
   # GET /events.json
@@ -106,13 +111,6 @@ class EventsController < ApplicationController
   
   def trythis
     @events = Event.find(:all, :order => "random()", :limit => 1)
-  end
-  
-  def myevents
-  
-    @events = Event.find(:all, :order => 'date_time')
-    @events = Event.where("user_id = ?", params[:user_id])
-    #@events = Event.paginate(:page => params[:page])
   end
   
   def joiningevents

@@ -1,19 +1,18 @@
 /*
+Fachhochschule Salzburg
+MultimediaTechnology B 2010
+Basisqualifikationsprojekt 2a
+Daniel Krenmayr, Dimitri Reifschneider
+*/
+
+
+/*
  * This is a manifest file that'll automatically include all the stylesheets available in this directory
  * and any sub-directories. You're free to add application-wide styles to this file and they'll appear at
  * the top of the compiled file, but it's generally better to create a new file per style scope.
  *= require_self
  *= require_tree . 
 */
-
-.actions {
-  font-size: 17px;
-  font-family: Georgia;
-}
-
-.next_page {
-  float: right;
-}
 
 body {
   color: #202b30;
@@ -113,6 +112,20 @@ a:hover {
 	text-decoration: underline;
 }
 
+
+.actions {
+  font-size: 17px;
+  font-family: Georgia;
+}
+
+.next_page {
+  float: right;
+}
+
+.float_left {
+  float: left;
+  width: 500px;
+}
 
 .submit {
   width: 200px;

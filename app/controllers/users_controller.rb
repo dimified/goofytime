@@ -1,6 +1,10 @@
-class UsersController < ApplicationController
+# Fachhochschule Salzburg
+# MultimediaTechnology B 2010
+# Basisqualifikationsprojekt 2a
+# Daniel Krenmayr, Dimitri Reifschneider
 
-	# GET /users
+class UsersController < ApplicationController
+  # GET /users
   # GET /users.json
   def index
     @users = User.find(:all, :order => 'first_name')
@@ -14,7 +18,10 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
-  	@user = User.find(params[:id])
+    @events = Event.find(:all, :order => 'date_time')
+    @events = Event.where("user_id = ?", params[:user_id])
+    
+  	@user = User.find(params[:user_id])
 		
     respond_to do |format|
       format.html # show.html.erb
@@ -62,7 +69,7 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.update_attributes(params[:user])
-        format.html { redirect_to @user, notice: 'User was successfully updated.' }
+        format.html { redirect_to user_path(current_user.id, :user_id => current_user.id), notice: 'User was successfully updated.' }
         format.json { head :ok }
       else
         format.html { render action: "edit" }
@@ -78,17 +85,20 @@ class UsersController < ApplicationController
     @user.destroy
 
     respond_to do |format|
-      format.html { redirect_to users_url }
+      format.html { redirect_to user_path(current_user.id, :user_id => current_user.id) }
       format.json { head :ok }
     end
   end
   
   # DETACH photo
   def deletephoto
-  	@user = User.find(params[:temp])
+  	@user = User.find(params[:id])
   	@user.photo = nil
   	@user.save
   	
-  	redirect_to user_path(params[:temp])
-  end
+  	respond_to do |format|
+      format.html { redirect_to user_path(current_user.id, :user_id => current_user.id) }
+      format.json { head :ok }
+    end
+    end
 end

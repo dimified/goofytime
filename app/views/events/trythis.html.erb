@@ -1,6 +1,12 @@
-<h1>Try this event</h1>
+<!--
+Fachhochschule Salzburg
+MultimediaTechnology B 2010
+Basisqualifikationsprojekt 2a
+Daniel Krenmayr, Dimitri Reifschneider
+-->
 
 <% if(@events.empty?) %>
+  <h1>No Events :-(</h1>
   
   <p>No entries in your database</p>
   	 
@@ -22,6 +28,8 @@
   	     end
   	    end
     %>
+    
+    <h1>Try this event</h1>
     
     <span class="box">
       <p>
@@ -47,6 +55,3 @@
    
   <% end %>
 <% end %>  
-
-<!-- Link Back -->
-<p><%= link_to "« back to overview", events_path %></p>

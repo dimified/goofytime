@@ -1,4 +1,11 @@
-<h1>Goofie-List</h1>
+<!--
+Fachhochschule Salzburg
+MultimediaTechnology B 2010
+Basisqualifikationsprojekt 2a
+Daniel Krenmayr, Dimitri Reifschneider
+-->
+
+<h1>It's Goofytime</h1>
 
 <% @user_count = @users.count - 1 %>
 
@@ -9,7 +16,7 @@
     <% if user.id != current_user.id %>
       <%= user.first_name %> <%= user.last_name[0] %>.
       is a Goofy since <%= user.created_at.strftime("%d.%m.%Y") %>.
-      <small><%= link_to "Get in contact now", myevents_path(:user_id => user.id) %></small>
+      <small><%= link_to "Display events", user_path(current_user.id, :user_id => user.id) %></small>
     <% end %>
   </p>
   

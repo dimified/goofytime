@@ -1,5 +1,9 @@
-class EventsUsersController < ApplicationController
+# Fachhochschule Salzburg
+# MultimediaTechnology B 2010
+# Basisqualifikationsprojekt 2a
+# Daniel Krenmayr, Dimitri Reifschneider
 
+class EventsUsersController < ApplicationController
   # GET /events_users/new
   # GET /events_users/new.json
   def new

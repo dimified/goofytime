@@ -1,3 +1,10 @@
+<!--
+Fachhochschule Salzburg
+MultimediaTechnology B 2010
+Basisqualifikationsprojekt 2a
+Daniel Krenmayr, Dimitri Reifschneider
+-->
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,7 +31,7 @@
     <div id="headerNavigation">
       <% if current_user %>
         <ul>
-        	<li><%= link_to "Show profile", user_path(current_user.id) %></li>
+        	<li><%= link_to "Show profile", user_path(current_user.id, :user_id => current_user.id) %></li>
           <li><%= link_to "Edit profile", edit_user_path(current_user.id) %></li>
           <li><%= link_to "Logout", :logout %></li>
         </ul>
@@ -45,8 +52,7 @@
     <% if current_user %>
       <div id="navigationGoofytime">
         <ul>
-          <li><%= link_to "Show all Goofies", users_path %></li>
-          <li><%= link_to "My Goofies" %></li>
+          <li><%= link_to "Show Goofies", users_path %></li>
         </ul>
       </div>
       <div id="navigationActivity">
@@ -54,7 +60,7 @@
       <ul>
         <li><%= link_to "Show all Events", events_path %></li>
         <li><%= link_to "Try this!", :trythis %></li>
-        <li><%= link_to "My Events", :myevents %></li>
+        <li><%= link_to "My Events", user_path(current_user.id, :user_id => current_user.id) %></li>
         <li><%= link_to "Joining Events", :joiningevents %></li>
         <li><%= link_to "+ Add new Events", new_event_path %></li>
       </ul>

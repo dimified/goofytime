@@ -22,11 +22,7 @@ Goofytime::Application.routes.draw do
   
   # Events Route
   get "trythis" => "events#trythis", :as => "trythis"
-  get "myevents" => "events#myevents", :as => "myevents"
   get "joiningevents" => "events#joiningevents", :as => "joiningevents"
-  
-  # User Route
-  get "deletephoto" => "users#deletephoto", :as => "deletephoto"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

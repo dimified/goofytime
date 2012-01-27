@@ -1,3 +1,10 @@
+<!--
+Fachhochschule Salzburg
+MultimediaTechnology B 2010
+Basisqualifikationsprojekt 2a
+Daniel Krenmayr, Dimitri Reifschneider
+-->
+
 <h1>Goofytime Eventlist</h1>
 
 <% if @events.empty? %>
@@ -16,8 +23,8 @@
   
   <% @events.each do |event| %>
      
-    <% @u_id = Event.find(event.id).user_id
-       @user_firstname = User.find(@u_id).first_name
+    <% @user_id = Event.find(event.id).user_id
+       @user_firstname = User.find(@user_id).first_name
     %>
     
     <span class="box">   

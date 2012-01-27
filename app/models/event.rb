@@ -1,3 +1,8 @@
+# Fachhochschule Salzburg
+# MultimediaTechnology B 2010
+# Basisqualifikationsprojekt 2a
+# Daniel Krenmayr, Dimitri Reifschneider
+
 class Event < ActiveRecord::Base
   belongs_to :users
   has_and_belongs_to_many :users

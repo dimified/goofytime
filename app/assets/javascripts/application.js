@@ -1,3 +1,10 @@
+/*
+Fachhochschule Salzburg
+MultimediaTechnology B 2010
+Basisqualifikationsprojekt 2a
+Daniel Krenmayr, Dimitri Reifschneider
+*/
+
 // This is a manifest file that'll be compiled into including all the files listed below.
 // Add new JavaScript/Coffee code in separate files in this directory and they'll automatically
 // be included in the compiled file accessible from http://example.com/assets/application.js
@@ -27,96 +34,52 @@ $(document).ready(function () {
 
 });
 
+(function($) {	
+  $.fn.clearField = function(settings) {
 
-
-
-(function($) {
-	
-	$.fn.clearField = function(settings) {
+  settings = jQuery.extend({
+    blurClass: 'clearFieldBlurred',
+    activeClass: 'clearFieldActive',
+    attribute: 'rel',
+    value: ''
+  }, settings);
 		
-		/**
-		 * Settings
-		 * 
-		 */
-		
-		settings = jQuery.extend({
-			blurClass: 'clearFieldBlurred',
-			activeClass: 'clearFieldActive',
-			attribute: 'rel',
-			value: ''
-		}, settings);
-		
-		
-		/**
-		 * loop each element
-		 * 
-		 */
-		
-		return $(this).each(function() {
+  return $(this).each(function() {
 			
-			/**
-			 * Set element
-			 * 
-			 */
+  var el = $(this);
+  
+  settings.value = el.val();
 			
-			var el = $(this);
+  if(el.attr(settings.attribute) == undefined) {
+    el.attr(settings.attribute, el.val()).addClass(settings.blurClass);
+  } else {
+    settings.value = el.attr(settings.attribute);
+  }
 			
-			
-			/**
-			 * Get starting value
-			 * 
-			 */
-			
-			settings.value = el.val();
-			
-			
-			/**
-			 * Add or get attribute
-			 * 
-			 */
-			
-			if(el.attr(settings.attribute) == undefined) {
-				el.attr(settings.attribute, el.val()).addClass(settings.blurClass);
-			} else {
-				settings.value = el.attr(settings.attribute);
-			}
-			
-			
-			/**
-			 * Set focus action
-			 * 
-			 */
-			
-			el.focus(function() {
+  el.focus(function() {
 				
-				if(el.val() == el.attr(settings.attribute)) {
-					el.val('').removeClass(settings.blurClass).addClass(settings.activeClass);
-				}
+    if(el.val() == el.attr(settings.attribute)) {
+      el.val('').removeClass(settings.blurClass).addClass(settings.activeClass);
+    }
 				
-			});
+  });
 			
-			
-			/**
-			 * Set blur action
-			 * 
-			 */
-			
-			el.blur(function() {
+  el.blur(function() {
 				
-				if(el.val() == '') {
-					el.val(el.attr(settings.attribute)).removeClass(settings.activeClass).addClass(settings.blurClass);
-				}
+    if(el.val() == '') {
+      el.val(el.attr(settings.attribute)).removeClass(settings.activeClass).addClass(settings.blurClass);
+    }
 				
-			});
+  });
 			
 			
-		});
+  });
 		
-	};
+};
 	
 })(jQuery);
 
 
 $(document).ready(function() {
-		$('.clearField').clearField();
-	});
+  $('.clearField').clearField();
+});
