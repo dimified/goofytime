@@ -104,7 +104,7 @@ class EventsController < ApplicationController
     @event.destroy
 
     respond_to do |format|
-      format.html { redirect_to user_path(current_user.id, :user_id => current_user.id) }
+      format.html { redirect_to events_url }
       format.json { head :ok }
     end
   end
