@@ -34,7 +34,7 @@ Daniel Krenmayr, Dimitri Reifschneider
     <span class="box">
       <p>
       In <%= distance_of_time_in_words(Time.now, event.date_time) %> (<%= event.date_time.strftime("%d.%m.%Y") %>)
-      <%= @user_firstname %> wants to 
+      <%= link_to @user_firstname, user_path(current_user.id, :user_id => @user_id) %> wants to 
       <%= link_to event.title, event %>   
       in <%= event.city %>
       at <%= event.location %> 
@@ -46,9 +46,9 @@ Daniel Krenmayr, Dimitri Reifschneider
       
       <% if @owner != 1 %>
         <% if @attending == 1 %>
-          <%= link_to 'unattend this event', events_user_path(:event_id => event.id), confirm: 'Are you sure?', method: :delete %> 
+          <%= link_to 'Unattend this event', events_user_path(:event_id => event.id), confirm: 'Are you sure?', method: :delete %> 
         <% else %>
-          <%= link_to 'Join this event now', new_events_user_path(:event_id => event.id) %>
+          <%= link_to 'Attend this event now', new_events_user_path(:event_id => event.id) %>
         <% end %>
       <% end %>
     </span>

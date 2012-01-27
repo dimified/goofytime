@@ -18,6 +18,6 @@ class Event < ActiveRecord::Base
   
   attr_accessible :title, :city, :location, :date_time, :person_limit, :description
   
-  self.per_page = 1
+  self.per_page = 10
   
 end
