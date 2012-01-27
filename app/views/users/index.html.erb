@@ -1,10 +1,16 @@
-<h1>Listing events_users</h1>
+<h1>Goofie-List</h1>
+
+<% @user_count = @users.count - 1 %>
+
+<strong>Hey! <%= @user_count %> other Goofies want to checkout new events with you!</strong>
 
 <% @users.each do |user| %>
   <p>
-    <%= user.first_name %> <%= user.last_name[0] %>.
-    is a Goofy since <%= user.created_at.strftime("%d.%m.%Y") %>.
-    <small><%= link_to "Get in contact now" %></small>
+    <% if user.id != current_user.id %>
+      <%= user.first_name %> <%= user.last_name[0] %>.
+      is a Goofy since <%= user.created_at.strftime("%d.%m.%Y") %>.
+      <small><%= link_to "Get in contact now", myevents_path(:user_id => user.id) %></small>
+    <% end %>
   </p>
   
 <% end %>

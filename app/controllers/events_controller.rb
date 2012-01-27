@@ -109,9 +109,10 @@ class EventsController < ApplicationController
   end
   
   def myevents
+  
     @events = Event.find(:all, :order => 'date_time')
-    @events = Event.where("user_id = ?", current_user.id)
-    @events = Event.paginate(:page => params[:page])
+    @events = Event.where("user_id = ?", params[:user_id])
+    #@events = Event.paginate(:page => params[:page])
   end
   
   def joiningevents
