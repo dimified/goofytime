@@ -1,13 +1,16 @@
+<% if @user.photo?%>
+	<div id="pictureContainer"><div id="userPicture"><%= image_tag @user.photo.url(:medium) %></div>
+<% else %>
+	<div id="pictureContainer"><div id="defaultPicture"></div>
+<% end %>
+	
+<% if @user.photo? %>
+	<p><%= link_to 'Delete Picture', deletephoto_path(:temp => @user.id) %></p>
+<% end %>
+</div>
+
 <div id="showUserInformation">
-	<h1><%= @user.first_name %> <%= @user.last_name %></h1>
+	<h1><%= @user.first_name %> <%= @user.last_name %> <%= link_to 'Edit', edit_user_path(@user) %></h1> 
 	Get in Contact
 	<div><%= mail_to @user.email %></div>
 </div>
-
-<% if @user.photo?%>
-	<div id="userPicture"><%= image_tag @user.photo.url(:medium) %></div>
-<% else %>
-	<p><div id="userPicture"></div></p>
-<% end %>
-	
-<%= link_to 'Edit', edit_user_path(@user) %>
