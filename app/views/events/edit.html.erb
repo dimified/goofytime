@@ -1,0 +1,33 @@
+<%= form_for @event do |f| %>
+
+  <% if @event.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@event.errors.count, "error") %> prohibited this event from being saved:</h2>
+
+      <ul>
+      <% @event.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="actions">
+    <div>
+      <p>I want to <%= f.text_field :title, :class => 'input_form_want_to' %>
+      on <%= f.text_field :date_time, :class => "datepicker input_form_in_line", :value => @event.date_time.strftime('%Y-%m-%d') %></p>
+      <p>in <%= f.text_field :city, :class => 'input_form_in_line' %>
+      at <%= f.text_field :location, :class => 'input_form_in_line' %>
+      and invite <%= f.text_field :person_limit, :class => 'input_form_in_line' %> others.</p>
+    </div>
+    <p>
+      <%= f.text_area :description %>
+    </p>
+
+    <%= f.submit %>
+  </div>
+  
+<% end %>
+
+<!-- Link Back -->
+<p><%= link_to "« back to overview", events_path %></p>

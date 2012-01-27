@@ -1,0 +1,25 @@
+<span class="box">
+  <p>
+  In <%= distance_of_time_in_words(Time.now, @event.date_time) %> (<%= @event.date_time.strftime("%d.%m.%Y") %>)
+  <%= @user_firstname %> wants to 
+  <%= @event.title %>   
+  in <%= @event.city %>
+  at <%= @event.location %> 
+  with <%= @event.person_limit %> other goofys
+  </p>
+  
+<h4>In detail this means:</h4>
+<p><div><%= @event.description %></div></p>
+
+<% if @owner != 1 %>
+  <% if @attending == 1 %>
+    <%= link_to 'unattend this event', events_user_path(:event_id => @event.id), confirm: 'Are you sure?', method: :delete %> 
+  <% else %>
+    <%= link_to 'Join this event now', new_events_user_path(:event_id => @event.id) %>
+  <% end %>
+<% end %>
+
+</span>
+
+<!-- Link Back -->
+<p><%= link_to "« back to overview", events_path %></p>

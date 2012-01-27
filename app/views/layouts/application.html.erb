@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Goofytime</title>
+  <%= stylesheet_link_tag    "application" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+<% if flash[:warning] or flash[:notice] %>
+  <% if flash[:notice] %>
+    <div id="showFlashNotice" class="showFlash">
+  <% else %>
+    <div id="showFlashWarning" class="showFlash">
+  <% end %> 
+    <%= flash[:warning] || flash[:notice] %>
+  </div>
+<% end %>
+
+<div id="container">  
+  <div id="header">
+    <div id="logo"><%= link_to image_tag("logo_goofytime.png"), root_path %></div>
+    <div id="headerNavigation">
+      <% if current_user %>
+        <ul>
+        	<li><%= link_to "Show profile", user_path(current_user.id) %></li>
+          <li><%= link_to "Edit profile", edit_user_path(current_user.id) %></li>
+          <li><%= link_to "Logout", :logout %></li>
+        </ul>
+      <% else %>
+        <ul>
+          <li><%= link_to "About Goofytime", :about %></li>
+        </ul>  
+     <% end %>
+    </div>
+  </div>
+  
+  <div id="content">
+    <%= yield %>
+  </div>
+  
+  <div id="navigation">
+    <h3>It's Goofytime</h3>
+    <% if current_user %>
+      <div id="navigationGoofytime">
+        <ul>
+          <li><%= link_to "Show all Goofies", users_path %></li>
+          <li><%= link_to "My Goofies" %></li>
+        </ul>
+      </div>
+      <div id="navigationActivity">
+      <h3>Events</h3>
+      <ul>
+        <li><%= link_to "Show all Events", events_path %></li>
+        <li><%= link_to "Try this!", :trythis %></li>
+        <li><%= link_to "My Events", :myevents %></li>
+        <li><%= link_to "Joining Events", :joiningevents %></li>
+        <li><%= link_to "+ Add new Events", new_event_path %></li>
+      </ul>
+      </div>
+    <% else %>
+      <ul>
+        <li><%= link_to "Signup", :signup %></li>
+        <li><%= link_to "Login", :login %></li>
+      </ul>
+    <% end %>
+  </div>
+  
+  <div id="footer">
+    &copy; 2011 Daniel Krenmayr & Dimitri Reifschneider | QPT2a - University of Applied Sciences Salzburg
+    <div id="footerRight">
+      <%= link_to "Support", :support %>
+      <%= link_to "Contact", :contact %>
+      <%= link_to "Privacy", :privacy %>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

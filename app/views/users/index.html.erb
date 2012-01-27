@@ -1,0 +1,10 @@
+<h1>Listing events_users</h1>
+
+<% @users.each do |user| %>
+  <p>
+    <%= user.first_name %> <%= user.last_name[0] %>.
+    is a Goofy since <%= user.created_at.strftime("%d.%m.%Y") %>.
+    <small><%= link_to "Get in contact now" %></small>
+  </p>
+  
+<% end %>

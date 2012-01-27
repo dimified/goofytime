@@ -1,0 +1,286 @@
+/*
+ * This is a manifest file that'll automatically include all the stylesheets available in this directory
+ * and any sub-directories. You're free to add application-wide styles to this file and they'll appear at
+ * the top of the compiled file, but it's generally better to create a new file per style scope.
+ *= require_self
+ *= require_tree . 
+*/
+
+.actions {
+  font-size: 17px;
+  font-family: Georgia;
+}
+
+.next_page {
+  float: right;
+}
+
+body {
+  color: #202b30;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 12px; 
+  line-height: 18px;
+  margin: 0px;
+  padding: 0px;
+  background-color: #fff;
+  background-image: url('/images/background.png');
+  background-repeat: repeat-x;
+}
+
+h1 {
+  font-size: 18px;
+  margin:0 0 40px 0;
+  color: #507179;
+}
+
+h2 {
+  float: left;
+  padding: 0px;
+  margin: 0px;
+  font-size: 15px;
+  font-weight: normal;
+}
+
+h3 {
+  display: block;
+  width: 272px;
+  margin: 0px;
+  padding: 8px 8px 8px 20px;	
+  color: #507179;
+}
+
+h4 {
+  font-size: 12px;
+  font-family: 'Open Sans', sans-serif;
+  color: #507179;
+}
+
+ul {
+  margin: 40px 0 0 20px;
+  padding: 0px;
+}
+
+label {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 12px; 
+  line-height: 18px;
+}
+
+input, textarea, select {
+  width: 600px;
+  border: 1px solid #D9D9D9;
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.75);
+  font-size: 10pt;
+  height: 35px;
+  margin-top: 5px;
+  padding-left: 5px;
+  margin-bottom: 10px;
+}
+
+.input_form_in_line, .input_form_want_to {
+  color: #202b30;
+  font-family: Georgia;
+  font-size: 19px; 
+  line-height: 18px;
+  width: 134px;
+  height: 22px;
+  border: none;
+  border-bottom: 1px solid #999;
+  font-style: italic;
+}
+
+.input_form_want_to {
+  width: 280px;
+}
+
+select {
+  width: auto;
+  height: auto;
+}
+
+textarea {
+  height: 200px;
+}
+
+a {
+	color: #57a9ba;
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+
+.submit {
+  width: 200px;
+  background-color: #91b2b9;
+  color: #fff;
+  margin-left: 427px;
+}
+
+.linkBackToOverview {
+  float: right;
+  margin-top: 5px;
+}
+
+#errorBoxRed {
+  float: left;
+  width: 590px;
+  padding: 20px;
+  margin-bottom: 50px;
+  background-color: #f0b5b5;
+}
+
+#showFlashNotice, #showFlashWarning {
+  position: absolute;
+  width: 250px;
+  left: 50%;
+  margin-left: -125px;
+  text-align: center;
+  padding: 5px 20px 5px 20px;
+  background-color: #9eb824;
+  color: #FFF;
+  font-size: 10px;
+  border-radius: 0 0 2px 2px;
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1);
+}
+
+#showFlashWarning {
+  color: #202b30;
+  background-color: #f0b5b5;	
+}
+
+#container {
+  width: 960px;
+  margin: 0 auto;
+}
+
+#header {
+  width: 950px;
+  height: 52px;
+  padding-right: 10px;
+}
+
+#logo{
+	float: left;
+	margin-top: 10px;
+}
+
+#headerNavigation {
+  float: right;
+  margin-top: 17px;
+}
+
+#headerNavigation ul {
+  padding: 0px;
+  margin: 0px;
+}
+
+#headerNavigation li {
+  list-style: none;
+  display: inline;
+  margin-left: 15px;
+}
+
+#headerNavigation a {
+  color: #646464;
+  font-size: 11px;
+  text-decoration: none;
+}
+
+#headerNavigation a:hover {
+  text-decoration: underline;
+}
+
+#content {
+  float: left;
+  width: 600px;
+  margin-top: 50px;
+}
+
+.box {
+  float: left;
+  width: 558px;
+  border: 1px solid #ededed;
+  margin-bottom: 20px;
+  padding: 0 20px 0 20px;
+}
+
+.grey {
+  color: #ccc;
+}
+
+.eventLocation, .eventOptions {
+  text-align: right;
+  float: right;
+  color: #ccc;
+  margin-left: 20px;
+}
+
+#navigation {
+  float: right;
+  width: 290px;
+  padding: 30px 0;
+  padding-top: 50px;
+  border-left: 1px solid #eeeeee;
+}
+
+#navigation ul {
+  padding: 0px;
+  margin: 0px;
+}
+
+#navigation li {
+  list-style: none;
+}
+
+#navigation a {
+  float: left;
+  display: block;
+  width: 245px;
+  color: #646464;
+  text-decoration: none;
+  padding: 8px 8px 8px 40px;
+}
+
+#navigation a:hover {
+	background-color: #eef5fa;
+}
+
+#navigationGoofytime {
+  float: left;
+  margin: 0px;
+  padding: 0px;
+}
+
+#navigationActivity {
+  float: left;
+  margin: 30px 0 0 0;
+  padding: 0px;
+}
+
+#footer {
+	float: left;
+	width: 940px;
+	height: 30px;
+	margin-top: 30px;
+	padding: 8px 10px 0px 10px;
+	border-top: 1px solid #eee;
+	color: #ccc;
+	font-size: 11px;
+}
+
+#footerRight {
+  float: right;
+}
+
+#footer a {
+	color: #57a9ba;
+	text-decoration: none;
+	margin-left: 15px;
+}
+
+#footer a:hover {
+	text-decoration: underline;
+}

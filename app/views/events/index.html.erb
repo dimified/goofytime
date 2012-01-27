@@ -1,0 +1,58 @@
+<h1>Goofytime Eventlist</h1>
+
+<% if @events.empty? %>
+  
+  <p>No entries in database</p>
+  
+  <% if !current_user %>
+    <%= link_to "Login to add an event", :login %>
+  <% end %>	 
+
+<% else %>
+  
+  <% if !current_user %>
+    <p><%= link_to "Login for more events", :login %></p>
+  <% end %>
+  
+  <% @events.each do |event| %>
+     
+    <% @u_id = Event.find(event.id).user_id
+       @user_firstname = User.find(@u_id).first_name
+    %>
+    
+    <span class="box">   
+      <p>
+      In <%= distance_of_time_in_words(Time.now, event.date_time) %> 
+      <%= @user_firstname %> wants to 
+      
+      <% if current_user %>
+        <%= link_to event.title, event %>
+      <% else %>  
+        <%= event.title %> 
+      <% end %>  
+      
+      in <%= event.city %> @ <%= event.location %> with <%= event.person_limit %> other goofys
+      </p>
+      
+      <p>
+      
+      <% if current_user %>
+        <%= link_to 'Show details', event %>
+        <% if @u_id == current_user.id %>
+          | <%= link_to 'Edit', edit_event_path(event) %>
+          | <%= link_to 'Destroy', event, confirm: 'Are you sure?', method: :delete %>  
+        <% end %>
+      <% else %>
+         Login to join this event!
+      <% end %>
+      </p>
+      
+    </span>
+  <% end %>
+  
+  <!-- works also for offline state -->
+  <% if current_user %>
+    <%= will_paginate @events, :page_links => false %>
+  <% end %>  
+
+<% end %>   
