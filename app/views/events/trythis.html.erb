@@ -31,6 +31,8 @@ Daniel Krenmayr, Dimitri Reifschneider
     
     <h1>Try this event</h1>
     
+    <%= @events_count %>
+    
     <span class="box">
       <p>
       In <%= distance_of_time_in_words(Time.now, event.date_time) %> (<%= event.date_time.strftime("%d.%m.%Y") %>)
