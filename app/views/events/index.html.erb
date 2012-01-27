@@ -47,9 +47,8 @@ Daniel Krenmayr, Dimitri Reifschneider
       <% end %>  
       
       in <%= event.city %> @ <%= event.location %> with <%= event.person_limit %> other goofies
-      </p>
-      
-<<<<<<< HEAD
+      </p>  
+
       <% if current_user %>
         <% if @attending.count > 0 %>
           <% if @attending.count == 1 %>
@@ -58,7 +57,11 @@ Daniel Krenmayr, Dimitri Reifschneider
             <p><strong><%= @user_firstname %></strong> and  <strong><%= @attending.count %></strong> Goofies are attending this event</p>
           <% end %>  
           
-          <%= link_to (image_tag @user_photo.url(:thumb), :class => 'attending_image_leader'), user_path(@user_id, :user_id => @user_id) %>
+          <% if @user_photo.to_s.include? "missing" %>
+            <%= link_to (image_tag @user_photo.url(:thumb), :class => 'attending_image_leader'), user_path(@user_id, :user_id => @user_id) %>
+          <% else %>
+            <%= link_to (image_tag @user_photo.url(:thumb), :class => 'attending_image_leader'), user_path(@user_id, :user_id => @user_id) %>
+          <% end %>
           
           <% @attending.each do |attending| %>
        
