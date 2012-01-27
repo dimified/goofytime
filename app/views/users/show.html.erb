@@ -33,11 +33,12 @@ Daniel Krenmayr, Dimitri Reifschneider
     <p>No events created at the moment.</p>
   	 
   <% else %>
+        
+    <h1>Eventlist</h1>    
+  
     <% @events.each do |event| %>
   
       <% @user_firstname = User.find(params[:user_id]).first_name %>
-    
-      <h1><%= @user_firstname %>'s eventlist</h1>
     
       <span class="box">
       
@@ -45,10 +46,10 @@ Daniel Krenmayr, Dimitri Reifschneider
           <p class="grey">
         <% else %>
           <p>  
-        <% end %>  
-      
+        <% end %>
+        
         In <%= distance_of_time_in_words(Time.now, event.date_time) %> (<%= event.date_time.strftime("%d.%m.%Y") %>)
-        you want to 
+        <%= @user_firstname %> want to 
         <%= link_to event.title, event %> 
         in <%= event.city %>
         at <%= event.location %> 
@@ -57,7 +58,7 @@ Daniel Krenmayr, Dimitri Reifschneider
         <p>
         <%= link_to 'Show details', event %>
       
-        <% if event.id == current_user.id %>
+        <% if event.user_id == current_user.id %>
             | <%= link_to 'Edit', edit_event_path(event) %> 
             | <%= link_to 'Destroy', event, confirm: 'Are you sure?', method: :delete %>  
         <% end %>  

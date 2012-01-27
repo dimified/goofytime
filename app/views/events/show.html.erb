@@ -15,15 +15,15 @@ Daniel Krenmayr, Dimitri Reifschneider
   with <%= @event.person_limit %> other goofys
   </p>
   
-<h4>In detail this means:</h4>
-<p><div><%= @event.description %></div></p>
+  <h4>In detail this means:</h4>
+  <p><div><%= @event.description %></div></p>
 
-<% if @owner != 1 %>
-  <% if @attending == 1 %>
-    <%= link_to 'unattend this event', events_user_path(:event_id => @event.id), confirm: 'Are you sure?', method: :delete %> 
-  <% else %>
-    <%= link_to 'Join this event now', new_events_user_path(:event_id => @event.id) %>
+  <% if @owner != 1 %>
+    <% if @attending == 1 %>
+      <%= link_to 'Unattend this event', events_user_path(:event_id => @event.id), confirm: 'Are you sure?', method: :delete %> 
+    <% else %>
+      <%= link_to 'Attend this event now', new_events_user_path(:event_id => @event.id) %>
+    <% end %>
   <% end %>
-<% end %>
 
 </span>

@@ -14,9 +14,9 @@ Daniel Krenmayr, Dimitri Reifschneider
 <% @users.each do |user| %>
   <p>
     <% if user.id != current_user.id %>
-      <%= user.first_name %> <%= user.last_name[0] %>.
+      <strong><%= user.first_name %> <%= user.last_name[0] %>.</strong>
       is a Goofy since <%= user.created_at.strftime("%d.%m.%Y") %>.
-      <small><%= link_to "Display events", user_path(current_user.id, :user_id => user.id) %></small>
+      <small><%= link_to "Show profile", user_path(current_user.id, :user_id => user.id) %></small>
     <% end %>
   </p>
   
