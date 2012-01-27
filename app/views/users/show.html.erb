@@ -27,6 +27,7 @@ Daniel Krenmayr, Dimitri Reifschneider
 </span>
 
 <span class="float_left" style="margin-top:50px;">
+
   <% if(@events.empty?) %>
     <h1>No Events :-(</h1>
   
@@ -49,7 +50,8 @@ Daniel Krenmayr, Dimitri Reifschneider
         <% end %>
         
         In <%= distance_of_time_in_words(Time.now, event.date_time) %> (<%= event.date_time.strftime("%d.%m.%Y") %>)
-        <%= @user_firstname %> want to 
+        <%=  %> 
+        <%= @user_firstname %> wants to 
         <%= link_to event.title, event %> 
         in <%= event.city %>
         at <%= event.location %> 
@@ -60,7 +62,7 @@ Daniel Krenmayr, Dimitri Reifschneider
       
         <% if event.user_id == current_user.id %>
             | <%= link_to 'Edit', edit_event_path(event) %> 
-            | <%= link_to 'Destroy', event, confirm: 'Are you sure?', method: :delete %>  
+            | <%= link_to 'Delete', event, confirm: 'Are you sure?', method: :delete %>  
         <% end %>  
         </p>
       

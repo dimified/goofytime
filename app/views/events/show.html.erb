@@ -5,10 +5,14 @@ Basisqualifikationsprojekt 2a
 Daniel Krenmayr, Dimitri Reifschneider
 -->
 
+<% @user_id = Event.find(@event.id).user_id %>
+
+<h1>All you have to know</h1>
+
 <span class="box">
   <p>
   In <%= distance_of_time_in_words(Time.now, @event.date_time) %> (<%= @event.date_time.strftime("%d.%m.%Y") %>)
-  <%= @user_firstname %> wants to 
+  <%= link_to @user_firstname, user_path(current_user.id, :user_id => @user_id) %> wants to 
   <%= @event.title %>   
   in <%= @event.city %>
   at <%= @event.location %> 
@@ -24,6 +28,11 @@ Daniel Krenmayr, Dimitri Reifschneider
     <% else %>
       <%= link_to 'Attend this event now', new_events_user_path(:event_id => @event.id) %>
     <% end %>
+    <% else %>
+      <% if @event.user_id == current_user.id %>
+        <%= link_to 'Edit', edit_event_path(@event) %> 
+        | <%= link_to 'Delete', event_path, confirm: 'Are you sure?', method: :delete %>  
+      <% end %> 
   <% end %>
 
 </span>
