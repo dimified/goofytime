@@ -72,7 +72,7 @@ Daniel Krenmayr, Dimitri Reifschneider
             @attending_user_photo = User.find(@attending_user_id).photo
             %>
             
-            <% if @user_photo.to_s.include? "missing" %>
+            <% if @attending_user_photo.to_s.include? "missing" %>
               <span class="defaultPictureSmallWithoutBorder"></span>
             <% else %>
               <%= link_to (image_tag @attending_user_photo.url(:thumb), :class => 'attending_image'), user_path(@attending_user_id, :user_id => @attending_user_id) %>
