@@ -118,6 +118,7 @@ a:hover {
 
 .attending_image_leader {
   border: 2px solid #57a9ba;
+  float: left;
 }
 
 
