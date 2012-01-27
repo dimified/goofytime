@@ -30,7 +30,7 @@ Daniel Krenmayr, Dimitri Reifschneider
     <span class="box">   
       <p>
       In <%= distance_of_time_in_words(Time.now, event.date_time) %> 
-      <%= link_to @user_firstname, user_path(current_user.id, :user_id => @user_id) %> wants to 
+      wants to 
       
       <% if current_user %>
         <%= link_to event.title, event %>
@@ -40,8 +40,6 @@ Daniel Krenmayr, Dimitri Reifschneider
       
       in <%= event.city %> @ <%= event.location %> with <%= event.person_limit %> other goofies
       </p>
-      
-      <p><%= @%></p>
       
       <p>
       
