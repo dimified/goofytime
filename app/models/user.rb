@@ -1,8 +1,15 @@
 class User < ActiveRecord::Base
   has_many :events
   has_and_belongs_to_many :events
+	has_attached_file :photo, :styles => {
+		:thumb => "30x30#",
+		:small => "100x100#",
+		:medium => "150x150#"
+	}
+	validates_attachment_size :photo, :less_than => 5.megabytes
+	validates_attachment_content_type :photo, :content_type => ['image/jpeg', 'image/png']
 	
-  attr_accessible :first_name, :last_name, :email, :password, :password_confirmation
+  attr_accessible :first_name, :last_name, :email, :password, :password_confirmation, :photo
 	
   attr_accessor :password
   before_save :encrypt_password
@@ -29,8 +36,4 @@ class User < ActiveRecord::Base
       self.password_hash = BCrypt::Engine.hash_secret(password, password_salt)
     end
   end
-  
-  def is_admin?
-		redirect_to root_url if is_admin 
-	end
 end

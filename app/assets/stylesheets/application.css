@@ -23,7 +23,7 @@ body {
   margin: 0px;
   padding: 0px;
   background-color: #fff;
-  background-image: url('/images/background.png');
+  background-image: url('/assets/background.png');
   background-repeat: repeat-x;
 }
 
@@ -283,4 +283,17 @@ a:hover {
 
 #footer a:hover {
 	text-decoration: underline;
+}
+
+#userPicture{
+	background: url('/assets/default_photo.jpg') no-repeat;
+	width: 150px;
+	height: 150px;
+	border: solid 3px #ccc;
+	margin-top: -10px;
+}
+
+#showUserInformation{
+	float: left;
+	margin-left: 30%;
 }

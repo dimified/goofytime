@@ -1,2 +1,13 @@
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>
+<div id="showUserInformation">
+	<h1><%= @user.first_name %> <%= @user.last_name %></h1>
+	Get in Contact
+	<div><%= mail_to @user.email %></div>
+</div>
+
+<% if @user.photo?%>
+	<div id="userPicture"><%= image_tag @user.photo.url(:medium) %></div>
+<% else %>
+	<p><div id="userPicture"></div></p>
+<% end %>
+	
+<%= link_to 'Edit', edit_user_path(@user) %>
