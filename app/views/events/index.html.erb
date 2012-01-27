@@ -25,13 +25,21 @@ Daniel Krenmayr, Dimitri Reifschneider
      
     <% @user_id = Event.find(event.id).user_id
        @user_firstname = User.find(@user_id).first_name
+       @user_photo = User.find(@user_id).photo
+       
+       # user photo
+       @attending = EventsUser.where("event_id = ?", event.id)
     %>
-    
+       
     <span class="box">   
       <p>
       In <%= distance_of_time_in_words(Time.now, event.date_time) %> 
-      wants to 
-      
+      <% if current_user %>
+        <%= link_to @user_firstname, user_path(current_user.id, :user_id => @user_id) %> 
+      <% else %>
+        <em>a Goofy</em>
+      <% end %>    
+        wants to 
       <% if current_user %>
         <%= link_to event.title, event %>
       <% else %>  
@@ -40,9 +48,34 @@ Daniel Krenmayr, Dimitri Reifschneider
       
       in <%= event.city %> @ <%= event.location %> with <%= event.person_limit %> other goofies
       </p>
+
+      <% if current_user %>
+        <% if @attending.count > 0 %>
+          <% if @attending.count == 1 %>
+            <p><strong><%= @user_firstname %></strong> and <strong><%= @attending.count %></strong> Goofy is attending this event</p>
+          <% else %>
+            <p><strong><%= @user_firstname %></strong> and  <strong><%= @attending.count %></strong> Goofies are attending this event</p>
+          <% end %>  
+          
+          <%= link_to (image_tag @user_photo.url(:thumb), :class => 'attending_image_leader'), user_path(@user_id, :user_id => @user_id) %>
+          
+          <% @attending.each do |attending| %>
+       
+          <% if @attending.count > 0 %>
+           
+            <%
+            @attending_user_id = EventsUser.find(attending).user_id
+            @attending_user_photo = User.find(@attending_user_id).photo
+            %>
+            
+            <%= link_to (image_tag @attending_user_photo.url(:thumb), :class => 'attending_image'), user_path(@attending_user_id, :user_id => @attending_user_id) %>
+            
+            <% end %>
+          <% end %>
+        <% end %>  
+      <% end %>
       
       <p>
-      
       <% if current_user %>
         <%= link_to 'Show details', event %>
         <% if @u_id == current_user.id %>

@@ -112,6 +112,14 @@ a:hover {
 	text-decoration: underline;
 }
 
+.attending_image, .attending_image_leader {
+  border: 2px solid #f6fbff;
+}
+
+.attending_image_leader {
+  border: 2px solid #ccc;
+}
+
 
 .actions {
   font-size: 17px;
