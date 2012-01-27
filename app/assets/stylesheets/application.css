@@ -117,7 +117,7 @@ a:hover {
 }
 
 .attending_image_leader {
-  border: 2px solid #ccc;
+  border: 2px solid #57a9ba;
 }
 
 
@@ -227,7 +227,8 @@ a:hover {
   width: 558px;
   border: 1px solid #ededed;
   margin-bottom: 20px;
-  padding: 0 20px 0 20px;
+  padding: 10px 20px 10px 20px;
+	background-color: #f6fbff; 
 }
 
 .grey {
@@ -308,23 +309,23 @@ a:hover {
 	text-decoration: underline;
 }
 
-#pictureContainer{
+#pictureContainer {
 	float: left;
 }
 
-#editProfile{
+#editProfile {
 	float: right;
 	text-align: right;
 }
 
-#userPicture{
+#userPicture {
 	width: 150px;
 	height: 150px;
 	border: solid 3px #ccc;
 	margin-top: -10px;
 }
 
-#defaultPicture{
+#defaultPicture {
 	background: url('/assets/default_photo.jpg') no-repeat;
 	width: 150px;
 	height: 150px;
@@ -332,7 +333,15 @@ a:hover {
 	margin-top: -10px;
 }
 
-#showUserInformation{
+#defaultPictureSmall {
+	float: left;
+	background: url('/assets/default_photo_30x30.jpg') no-repeat;
+	width: 30px;
+	height: 30px;
+	border: solid 2px #57a9ba;
+}
+
+#showUserInformation {
 	margin-left: 30px;
 	float: left;
 }
