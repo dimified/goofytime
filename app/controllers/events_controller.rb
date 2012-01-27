@@ -110,7 +110,7 @@ class EventsController < ApplicationController
   end
   
   def trythis
-    @events = Event.find(:all, :order => "randomize", :limit => 1)
+    @events = Event.find(:all, :order => "RAND()", :limit => 1)
     #@events = Event.find(:all, :order => "random()", :limit => 1)
   end
   
