@@ -28,7 +28,7 @@ Daniel Krenmayr, Dimitri Reifschneider
       and invite <%= f.text_field :person_limit, :class => 'input_form_in_line clearField', :value => '15' %> others.</p>
     </div>
     <p>
-      <%= f.text_area :description, :value => 'Lets meet at 8 o´clock pm.' %>
+      <%= f.text_area h(:description), :value => 'Lets meet at 8 o´clock pm.' %>
     </p>
 
     <%= f.submit %>
