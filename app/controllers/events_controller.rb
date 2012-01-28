@@ -113,9 +113,8 @@ class EventsController < ApplicationController
     end
   end
   
-  def trythis
-    @events = Event.find(:all, :order => "RAND()", :limit => 1)
-    #@events = Event.find(:all, :order => "random()", :limit => 1)
+  def feelinggoofy
+    @events = Event.find(:all, :order => "RANDOM()", :limit => 1, :conditions => ["user_id != ?", current_user.id])
   end
   
   def joiningevents

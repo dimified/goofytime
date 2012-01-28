@@ -20,7 +20,7 @@ Goofytime::Application.routes.draw do
   get "privacy" => "pages#privacy", :as => "privacy"
   
   # Events Route
-  get "trythis" => "events#trythis", :as => "trythis"
+  get "feelinggoofy" => "events#feelinggoofy", :as => "feelinggoofy"
   get "joiningevents" => "events#joiningevents", :as => "joiningevents"
 
   # The priority is based upon order of creation:

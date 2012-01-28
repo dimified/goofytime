@@ -20,7 +20,7 @@ Daniel Krenmayr, Dimitri Reifschneider
          @owner = 1
        else  
   	     @owner = 0
-  	  
+ 
   	     if(EventsUser.where("event_id = ? and user_id = ?", event.id, current_user.id).count > 0)
   	       @attending = 1
   	     else
@@ -29,9 +29,7 @@ Daniel Krenmayr, Dimitri Reifschneider
   	    end
     %>
     
-    <h1>Try this event</h1>
-    
-    <%= @events_count %>
+    <h1>We found this Event for you</h1>
     
     <span class="box">
       <p>
@@ -48,7 +46,7 @@ Daniel Krenmayr, Dimitri Reifschneider
       
       <% if @owner != 1 %>
         <% if @attending == 1 %>
-          <%= link_to 'Unattend this event', events_user_path(:event_id => event.id), confirm: 'Are you sure?', method: :delete %> 
+          Lucky You! You are already attending!
         <% else %>
           <%= link_to 'Attend this event now', new_events_user_path(:event_id => event.id) %>
         <% end %>
