@@ -340,6 +340,7 @@ a:hover {
 	width: 30px;
 	height: 30px;
 	border: solid 2px #57a9ba;
+	font-size: 0;
 }
 
 .defaultPictureSmallWithoutBorder {
