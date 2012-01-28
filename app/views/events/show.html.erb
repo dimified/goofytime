@@ -23,16 +23,27 @@ Daniel Krenmayr, Dimitri Reifschneider
   <p><div><%= @event.description %></div></p>
 
   <% if @owner != 1 %>
-    <% if @attending == 1 %>
-      <%= link_to 'Unattend this event', events_user_path(:event_id => @event.id), confirm: 'Are you sure?', method: :delete %> 
-    <% else %>
-      <%= link_to 'Attend this event now', new_events_user_path(:event_id => @event.id) %>
-    <% end %>
-    <% else %>
-      <% if @event.user_id == current_user.id %>
-        <%= link_to 'Edit', edit_event_path(@event) %> 
-        | <%= link_to 'Delete', event_path, confirm: 'Are you sure?', method: :delete %>  
-      <% end %> 
+  	
+      <% if @attending == 1 %>
+        <%= link_to 'Unattend this event', events_user_path(:event_id => @event.id), confirm: 'Are you sure?', method: :delete %> 
+      <% else %>
+      
+        <% if @attending_users < @person_limit %>
+          <%= link_to 'Attend this event now', new_events_user_path(:event_id => @event.id) %>
+        <% else %> 
+       	  Sorry, no more places available. Check out further
+       	  <%= link_to "events", user_path(current_user.id, :user_id => @user_id) %>
+        <% end %>
+          
+      <% end %>
+      
+  <% else %>
+  
+    <% if @event.user_id == current_user.id %>
+      <%= link_to 'Edit', edit_event_path(@event) %> 
+      | <%= link_to 'Delete', event_path, confirm: 'Are you sure?', method: :delete %>  
+    <% end %> 
+    
   <% end %>
 
 </span>

@@ -24,6 +24,10 @@ class EventsController < ApplicationController
   # GET /events/1
   # GET /events/1.json
   def show
+  	# limitation of attending persons to the official person limit
+    @person_limit = Event.find(params[:id]).person_limit
+    @attending_users = EventsUser.where("event_id = ?", params[:id]).count
+  
   	@event = Event.find(params[:id])
   	
   	@user_id = Event.find(@event.id).user_id
