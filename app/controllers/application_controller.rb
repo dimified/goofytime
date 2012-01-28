@@ -7,14 +7,6 @@ class ApplicationController < ActionController::Base
 	helper_method :current_user
 	
   protect_from_forgery
-
-  public
-	
-	def self.random
-    if (c = count) != 0
-      find(:first, :offset =>rand(c))
-    end
-  end
   
   private
   
