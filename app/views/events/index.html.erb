@@ -69,11 +69,13 @@ Daniel Krenmayr, Dimitri Reifschneider
           <% if @attending.count > 0 %>
             <%
             @attending_user_id = EventsUser.find(attending).user_id
+            @attending_user_firstname = User.find(@attending_user_id).first_name
+            @attending_user_lastname = User.find(@attending_user_id).last_name
             @attending_user_photo = User.find(@attending_user_id).photo
             %>
             
             <% if @attending_user_photo.to_s.include? "missing" %>
-              <%= link_to (image_tag "default_photo_30x30.jpg", :class => 'defaultPictureSmallWithoutBorder'), user_path(@attending_user_id, :user_id => @attending_user_id) %>
+              <%= link_to (image_tag "default_photo_30x30.jpg", :title => @attending_user_firstname + ' ' + @attending_user_lastname, :alt => @attending_user_firstname + ' ' + @attending_user_lastname, :class => 'defaultPictureSmallWithoutBorder'), user_path(@attending_user_id, :user_id => @attending_user_id) %>
             <% else %>
               <%= link_to (image_tag @attending_user_photo.url(:thumb), :class => 'attending_image'), user_path(@attending_user_id, :user_id => @attending_user_id) %>
             <% end %>
