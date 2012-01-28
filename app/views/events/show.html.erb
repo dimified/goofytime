@@ -20,8 +20,8 @@ Daniel Krenmayr, Dimitri Reifschneider
   </p>
   
   <h4>In detail this means:</h4>
-  <p><div><%= @event.description %></div></p>
-
+  <p><div><%= simple_format(h(@event.description).gsub("\n", "<br />")) %></div></p>
+  
   <% if @owner != 1 %>
   	
       <% if @attending == 1 %>
