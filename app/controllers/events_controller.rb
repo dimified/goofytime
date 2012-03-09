@@ -4,72 +4,46 @@
 # Daniel Krenmayr, Dimitri Reifschneider
 
 class EventsController < ApplicationController
-  # GET /events
-  # GET /events.json
+ 
   def index
-    @events = Event.find(:all, :order => 'date_time')
-    @events = Event.where(["date_time > ?", Time.now])
-    @events = Event.paginate(:page => params[:page])
-    
+    @events = Event.where("date_time > ?", Time.now).order("date_time ASC").paginate(:page => params[:page])
+
     if !current_user
       @events = Event.limit(5)
     end
 
     respond_to do |format|
-      format.html # index.html.erb
+      format.html 
       format.json { render json: @events }
     end
   end
 
-  # GET /events/1
-  # GET /events/1.json
   def show
-  	# limitation of attending persons to the official person limit
-    @person_limit = Event.find(params[:id]).person_limit
-    @attending_users = EventsUser.where("event_id = ?", params[:id]).count
-  
   	@event = Event.find(params[:id])
   	
-  	@user_id = Event.find(@event.id).user_id
-  	@user_firstname = User.find(@user_id).first_name
+  	@attending = EventsUser.where("event_id = ? and user_id = ?", @event.id, current_user.id).exists?
   	
-  	if @user_id == current_user.id
-      @owner = 1
-    else  
-  	  @owner = 0
-  	  
-  	  if(EventsUser.where("event_id = ? and user_id = ?", @event.id, current_user.id).count > 0)
-  	    @attending = 1
-  	  else
-  	    @attending = 0  
-  	  end
-  	end  
-		
+  	@number_of_attending_persons = EventsUser.where("event_id = ?", @event.id).count
+  	
     respond_to do |format|
-      format.html # show.html.erb
+      format.html 
       format.json { render json: @event }
     end
   end
 
-  # GET /events/new
-  # GET /events/new.json
   def new
     @event = Event.new
 
     respond_to do |format|
-      format.html # new.html.erb
+      format.html 
       format.json { render json: @event }
     end
   end
 
-  # GET /events/1/edit
   def edit
     @event = Event.find(params[:id])
-    
   end
 
-  # POST /events
-  # POST /events.json
   def create
     @event = Event.new(params[:event])
   	@event.user_id = current_user.id
@@ -85,8 +59,6 @@ class EventsController < ApplicationController
     end
   end
 
-  # PUT /events/1
-  # PUT /events/1.json
   def update
     @event = Event.find(params[:id])
 
@@ -101,23 +73,35 @@ class EventsController < ApplicationController
     end
   end
 
-  # DELETE /events/1
-  # DELETE /events/1.json
   def destroy
     @event = Event.find(params[:id])
     @event.destroy
 
     respond_to do |format|
-      format.html { redirect_to events_url }
+      format.html { redirect_to user_path(current_user.id) }
       format.json { head :ok }
     end
   end
   
   def feelinggoofy
-    @events = Event.find(:all, :order => "RAND()", :limit => 1, :conditions => ["user_id != ?", current_user.id])
+    #@events = Event.find(:all, :order => "RAND()", :limit => 1, :conditions => ["user_id != ?", current_user.id])
+    
+    # ACHTUNG RAND!!!!!!!!!!!!!!!!!!!!!!!
+    
+    @events = Event.where("user_id != ?", current_user.id).limit(1)
+    @is_empty = @events.empty?
   end
   
   def joiningevents
-    @joining_events = EventsUser.where("user_id = ?", current_user.id)
+    #@events = EventsUser.where("user_id = ?", current_user.id)
+    #@events = EventsUser.joins("INNER JOIN events ON events.event_id = event_id")
+    
+    #@events = Event.joins("INNER JOIN events_users ON events_users.event_id = event_id").where('event_users.user_id = ?', current_user.id) 
+    
+    #@events = find_by_sql("SELECT * FROM events INNER JOIN events_users ON events.event_id = events_users._event_id") 
+    
+    @is_empty = false
   end
 end
+
+

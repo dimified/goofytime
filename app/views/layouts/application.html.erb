@@ -31,7 +31,7 @@ Daniel Krenmayr, Dimitri Reifschneider
     <div id="headerNavigation">
       <% if current_user %>
         <ul>
-        	<li><%= link_to current_user.first_name + ' ' + current_user.last_name, user_path(current_user.id, :user_id => current_user.id) %></li>
+        	<li><%= link_to current_user.first_name + ' ' + current_user.last_name, user_path(current_user.id) %></li>
           <li><%= link_to "Edit profile", edit_user_path(current_user.id) %></li>
           <li><%= link_to "Logout", :logout %></li>
         </ul>
@@ -60,7 +60,7 @@ Daniel Krenmayr, Dimitri Reifschneider
       <ul>
         <li><%= link_to "Show all Events", events_path %></li>
         <li><%= link_to "Feeling Goofy!", :feelinggoofy %></li>
-        <li><%= link_to "My Events", user_path(current_user.id, :user_id => current_user.id) %></li>
+        <li><%= link_to "My Events", user_path(current_user.id) %></li>
         <li><%= link_to "Joining Events", :joiningevents %></li>
         <li><%= link_to "+ Add new Events", new_event_path %></li>
       </ul>

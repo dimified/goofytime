@@ -5,45 +5,35 @@ Basisqualifikationsprojekt 2a
 Daniel Krenmayr, Dimitri Reifschneider
 -->
 
-<% @user_id = Event.find(@event.id).user_id %>
+<% user = @event.user %>
 
 <h1>All you have to know</h1>
 
 <span class="box">
   <p>
-  In <%= distance_of_time_in_words(Time.now, @event.date_time) %> (<%= @event.date_time.strftime("%d.%m.%Y") %>)
-  <%= link_to @user_firstname, user_path(current_user.id, :user_id => @user_id) %> wants to 
-  <%= @event.title %>   
-  in <%= @event.city %>
-  at <%= @event.location %> 
-  with <%= @event.person_limit %> other goofies
+    In <%= distance_of_time_in_words(Time.now, @event.date_time) %> (<%= @event.date_time.strftime("%d.%m.%Y") %>)
+    <%= link_to user.first_name, user_path(current_user.id, :user_id => user.id) %> wants to 
+    <%= @event.title %>   
+    in <%= @event.city %>
+    at <%= @event.location %> 
+    with <%= @event.person_limit %> other goofies
   </p>
-  
+
   <h4>In detail this means:</h4>
   <p><div><%= simple_format(h(@event.description).gsub("\n", "<br />")) %></div></p>
-  
-  <% if @owner != 1 %>
-  	
-      <% if @attending == 1 %>
-        <%= link_to 'Unattend this event', events_user_path(:event_id => @event.id), confirm: 'Are you sure?', method: :delete %> 
-      <% else %>
-      
-        <% if @attending_users < @person_limit %>
-          <%= link_to 'Attend this event now', new_events_user_path(:event_id => @event.id) %>
-        <% else %> 
-       	  Sorry, no more places available. Check out further
-       	  <%= link_to "events", user_path(current_user.id, :user_id => @user_id) %>
-        <% end %>
-          
-      <% end %>
-      
-  <% else %>
-  
-    <% if @event.user_id == current_user.id %>
-      <%= link_to 'Edit', edit_event_path(@event) %> 
-      | <%= link_to 'Delete', event_path, confirm: 'Are you sure?', method: :delete %>  
-    <% end %> 
-    
-  <% end %>
 
+  <% if @event.owner?(current_user.id, user.id) %>
+      <%= link_to 'Edit', edit_event_path(@event) %> 
+      | <%= link_to 'Delete', event_path, confirm: 'Are you sure?', method: :delete %> 
+  <% else %>
+    <% if @number_of_attending_persons < @event.person_limit %>
+      <% if @attending %>
+        <p><%= link_to 'Unattend this event', events_user_path(:event_id => @event.id), confirm: 'Are you sure?', method: :delete %> </p>
+      <% else %>
+        <p><%= link_to 'Attend this event now', new_events_user_path(:event_id => @event.id) %></p>
+      <% end %>
+    <% else %>
+      <p>Sorry, no more places available. Check out further <%= link_to "events", events_path %></p>
+    <% end %>
+  <% end %>
 </span>

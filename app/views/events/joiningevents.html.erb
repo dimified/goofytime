@@ -5,42 +5,26 @@ Basisqualifikationsprojekt 2a
 Daniel Krenmayr, Dimitri Reifschneider
 -->
 
-<% if(@joining_events.empty?) %>
-  
-  <h1>No Events :-(</h1>
-  
-  <p>No entries in your database</p>
-  	 
+<% if @is_empty %>
+  <%= render :partial => 'noevent' %>
 <% else %>
+  
+  <h1>Joining Events</h1>
 
-  <% 
-  @joining_events.each do |joining_events|
+  <% @events.each do |event| %>
     
-    @event_id = EventsUser.find(joining_events).event_id
-    @events = Event.find(:all, :order => 'date_time')
-  	@events = Event.where(["id = ?", @event_id]) 	
-  	
-  	@events.each do |event|
-  	
-  	  @user_id = Event.find(event.id).user_id
-  	  @user_firstname = User.find(@user_id).first_name 
-  %>
-
-      <h1>Joining Events</h1>
+    <% user = event.user %>
       
-      <span class="box"> 
-        <p>
-          In <%= distance_of_time_in_words(Time.now, event.date_time) %> (<%= event.date_time.strftime("%d.%m.%Y") %>)
-          <%= @user_firstname %> wants to 
-          <%= link_to event.title, event %>
-          in <%= event.city %>
-          at <%= event.location %> 
-          with <%= event.person_limit %> other goofys
-        </p>
-        <%= link_to 'Show details of this event', event %>
-      </span>
-    
-    <% end %>
+    <span class="box"> 
+      <p>
+        In <%= distance_of_time_in_words(Time.now, event.date_time) %> (<%= event.date_time.strftime("%d.%m.%Y") %>)
+        <%= user.first_name %> wants to 
+        <%= link_to event.title, event %>
+        in <%= event.city %>
+        at <%= event.location %> 
+        with <%= event.person_limit %> other goofys
+      </p>
+      <%= link_to 'Show details of this event', event %>
+    </span>
   <% end %>
-    
-<% end %>	
+<% end %>

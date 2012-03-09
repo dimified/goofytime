@@ -4,7 +4,7 @@
 # Daniel Krenmayr, Dimitri Reifschneider
 
 class Event < ActiveRecord::Base
-  belongs_to :users
+  belongs_to :user
   has_and_belongs_to_many :users
 	
   validates_presence_of :title, :city, :location, :date_time, :person_limit, :on => :create
@@ -19,5 +19,13 @@ class Event < ActiveRecord::Base
   attr_accessible :title, :city, :location, :date_time, :person_limit, :description
   
   self.per_page = 10
+  
+  delegate :first_name, :to => :user
+  
+  def owner?(user_id, event_user_id)
+    if(user_id == event_user_id)
+      return true  
+    end  
+  end
   
 end

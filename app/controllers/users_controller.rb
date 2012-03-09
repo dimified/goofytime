@@ -4,10 +4,11 @@
 # Daniel Krenmayr, Dimitri Reifschneider
 
 class UsersController < ApplicationController
-  # GET /users
-  # GET /users.json
+
   def index
-    @users = User.find(:all, :order => 'first_name')
+    @users = User.order('first_name ASC')
+    # decrement user count to exclude current user account
+    @user_count = @users.count - 1
     
     respond_to do |format|
     	format.html # index.html.erb
@@ -15,13 +16,10 @@ class UsersController < ApplicationController
     end
   end
 
-  # GET /users/1
-  # GET /users/1.json
   def show
-    @events = Event.find(:all, :order => 'date_time')
-    @events = Event.where("user_id = ?", params[:user_id])
+    @events = Event.where("user_id = ?", params[:id]).order('date_time ASC')
     
-  	@user = User.find(params[:user_id])
+  	@user = User.find(params[:id])
 		
     respond_to do |format|
       format.html # show.html.erb
@@ -29,8 +27,6 @@ class UsersController < ApplicationController
     end
   end
 
-  # GET /users/new
-  # GET /users/new.json
   def new
     @user = User.new
 
@@ -40,13 +36,10 @@ class UsersController < ApplicationController
     end
   end
 
-  # GET /users/1/edit
   def edit
   	@user = User.find(session[:user_id])
   end
 
-  # POST /users
-  # POST /users.json
   def create
     @user = User.new(params[:user])
     @user = User.create(params[:user])
@@ -62,14 +55,12 @@ class UsersController < ApplicationController
     end
   end
 
-  # PUT /users/1
-  # PUT /users/1.json
   def update
     @user = User.find(params[:id])
 
     respond_to do |format|
       if @user.update_attributes(params[:user])
-        format.html { redirect_to user_path(current_user.id, :user_id => current_user.id), notice: 'User was successfully updated.' }
+        format.html { redirect_to user_path(current_user.id), notice: 'User was successfully updated.' }
         format.json { head :ok }
       else
         format.html { render action: "edit" }
@@ -78,26 +69,24 @@ class UsersController < ApplicationController
     end
   end
 
-  # DELETE /users/1
-  # DELETE /users/1.json
   def destroy
     @user = User.find(params[:id])
     @user.destroy
 
     respond_to do |format|
-      format.html { redirect_to user_path(current_user.id, :user_id => current_user.id) }
+      format.html { redirect_to user_path(current_user.id) }
       format.json { head :ok }
     end
   end
   
-  # DETACH photo
+  # detach photo
   def deletephoto
   	@user = User.find(params[:id])
   	@user.photo = nil
   	@user.save
   	
   	respond_to do |format|
-      format.html { redirect_to user_path(current_user.id, :user_id => current_user.id) }
+      format.html { redirect_to user_path(current_user.id) }
       format.json { head :ok }
     end
     end

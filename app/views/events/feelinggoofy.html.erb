@@ -5,53 +5,34 @@ Basisqualifikationsprojekt 2a
 Daniel Krenmayr, Dimitri Reifschneider
 -->
 
-<% if(@events.empty?) %>
-  <h1>No Events :-(</h1>
-  
-  <p>No entries in your database</p>
-  	 
+<% if @is_empty %>
+  <%= render :partial => 'noevent' %>
 <% else %>
+
+  <h1>We found this Event for you</h1>
+
   <% @events.each do |event| %>
-  
-    <% @user_id = Event.find(event.id).user_id
-       @user_firstname = User.find(@user_id).first_name
-    
-       if @user_id == current_user.id
-         @owner = 1
-       else  
-  	     @owner = 0
- 
-  	     if(EventsUser.where("event_id = ? and user_id = ?", event.id, current_user.id).count > 0)
-  	       @attending = 1
-  	     else
-  	       @attending = 0  
-  	     end
-  	    end
-    %>
-    
-    <h1>We found this Event for you</h1>
+
+    <% user = event.user %>
     
     <span class="box">
       <p>
-      In <%= distance_of_time_in_words(Time.now, event.date_time) %> (<%= event.date_time.strftime("%d.%m.%Y") %>)
-      <%= link_to @user_firstname, user_path(current_user.id, :user_id => @user_id) %> wants to 
-      <%= link_to event.title, event %>   
-      in <%= event.city %>
-      at <%= event.location %> 
-      with <%= event.person_limit %> other goofies
+        In <%= distance_of_time_in_words(Time.now, event.date_time) %> (<%= event.date_time.strftime("%d.%m.%Y") %>)
+        <%= link_to user.first_name, user_path(current_user.id) %> wants to 
+        <%= link_to event.title, event %>   
+        in <%= event.city %>
+        at <%= event.location %> 
+        with <%= event.person_limit %> other goofies
       </p>
   
       <h4>In detail this means:</h4>
       <p><div><%= event.description %></div></p>
       
-      <% if @owner != 1 %>
-        <% if @attending == 1 %>
-          Lucky You! You are already attending!
-        <% else %>
-          <%= link_to 'Attend this event now', new_events_user_path(:event_id => event.id) %>
-        <% end %>
+      <% if @attending %>
+        Lucky You! You are already attending!
+      <% else %>
+        <%= link_to 'Attend this event now', new_events_user_path(:event_id => event.id) %>
       <% end %>
     </span>
-   
   <% end %>
-<% end %>  
+<% end %>

@@ -23,7 +23,6 @@ Daniel Krenmayr, Dimitri Reifschneider
     Get in Contact
     <div><%= mail_to @user.email %></div>
   </div>
-
 </span>
 
 <span class="float_left" style="margin-top:50px;">
@@ -38,8 +37,6 @@ Daniel Krenmayr, Dimitri Reifschneider
     <h1>Eventlist</h1>    
   
     <% @events.each do |event| %>
-  
-      <% @user_firstname = User.find(params[:user_id]).first_name %>
     
       <span class="box">
       
@@ -50,7 +47,7 @@ Daniel Krenmayr, Dimitri Reifschneider
         <% end %>
         
         In <%= distance_of_time_in_words(Time.now, event.date_time) %> (<%= event.date_time.strftime("%d.%m.%Y") %>)
-        <%= @user_firstname %> wants to 
+        <%= @user.first_name %> wants to 
         <%= link_to event.title, event %> 
         in <%= event.city %>
         at <%= event.location %> 
@@ -58,16 +55,13 @@ Daniel Krenmayr, Dimitri Reifschneider
       
         <p>
         <%= link_to 'Show details', event %>
-      
+
         <% if event.user_id == current_user.id %>
             | <%= link_to 'Edit', edit_event_path(event) %> 
             | <%= link_to 'Delete', event, confirm: 'Are you sure?', method: :delete %>  
         <% end %>  
         </p>
-      
       </span>
-    
     <% end %>
-  
   <% end %>
 </span>	
