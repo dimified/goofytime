@@ -6,6 +6,7 @@
 class User < ActiveRecord::Base
   has_many :events
   has_and_belongs_to_many :events
+  
 	has_attached_file :photo, :styles => {
 		:thumb => "30x30#",
 		:small => "100x100#",

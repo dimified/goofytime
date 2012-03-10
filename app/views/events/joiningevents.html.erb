@@ -10,8 +10,10 @@ Daniel Krenmayr, Dimitri Reifschneider
 <% else %>
   
   <h1>Joining Events</h1>
-
-  <% @events.each do |event| %>
+  
+    Current User Id = <%=current_user.id %>
+		
+<% @events.each do |event| %>
     
     <% user = event.user %>
       
