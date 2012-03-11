@@ -5,17 +5,15 @@ Basisqualifikationsprojekt 2a
 Daniel Krenmayr, Dimitri Reifschneider
 -->
 
-<h1>Goofytime Eventlist</h1>
-
-<% if @events.empty? %>
-  
-  <p>No entries in database</p>
+<% if @is_empty %>
+  <%= render :partial => 'noevent' %>
   
   <% if !current_user %>
     <%= link_to "Login to add an event", :login %>
   <% end %>	 
-
 <% else %>
+
+  <h1>Goofytime Eventlist</h1>
   
   <% if !current_user %>
     <p><%= link_to "Login for more events", :login %></p>
@@ -23,11 +21,9 @@ Daniel Krenmayr, Dimitri Reifschneider
   
   <% @events.each do |event| %>
      
-    <% @user_id = Event.find(event.id).user_id
-       @user_firstname = User.find(@user_id).first_name
-       @user_lastname = User.find(@user_id).last_name
-       @user_photo = User.find(@user_id).photo
-       
+    <% user = event.user %>
+
+    <% 
        # user photo
        @attending = EventsUser.where("event_id = ?", event.id)
     %>
@@ -36,7 +32,7 @@ Daniel Krenmayr, Dimitri Reifschneider
       <p>
       In <%= distance_of_time_in_words(Time.now, event.date_time) %> 
       <% if current_user %>
-        <%= link_to @user_firstname, user_path(current_user.id) %> 
+        <%= link_to user.first_name, user_path(current_user.id) %> 
       <% else %>
         <em>a Goofy</em>
       <% end %>    
@@ -46,26 +42,26 @@ Daniel Krenmayr, Dimitri Reifschneider
       <% else %>  
         <%= event.title %> 
       <% end %>  
-      
       in <%= event.city %> @ <%= event.location %> with <%= event.person_limit %> other goofies
       </p>  
 
       <% if current_user %>
-      
+        <p><strong><%= user.first_name %></strong> and <strong><%= @attending.count %></strong>
         <% if @attending.count == 1 %>
-            <p><strong><%= @user_firstname %></strong> and <strong><%= @attending.count %></strong> Goofy is attending this event</p>
+          Goofy is attending this event
         <% else %>
-            <p><strong><%= @user_firstname %></strong> and  <strong><%= @attending.count %></strong> Goofies are attending this event</p>
+          Goofies are attending this event</p>
         <% end %>  
+        </p>
           
-        <% if @user_photo.to_s.include? "missing" %>
-          <%= link_to (image_tag "default_photo_30x30.jpg", :title => @user_firstname + ' ' + @user_lastname, :alt => @user_firstname + ' ' + @user_lastname, :class => 'defaultPictureSmall'), user_path(@user_id, :user_id => @user_id) %>            
+        <% if user.photo.to_s.include? "missing" %>
+          <%= link_to (image_tag "default_photo_30x30.jpg", :title => user.first_name + ' ' + user.last_name, :alt => user.first_name + ' ' + user.last_name, :class => 'defaultPictureSmall'), user_path(user.id) %>            
         <% else %>
-          <%= link_to (image_tag @user_photo.url(:thumb), :title => @user_firstname + ' ' + @user_lastname, :alt => @user_firstname + ' ' + @user_lastname, :class => 'attending_image_leader'), user_path(@user_id, :user_id => @user_id) %>
+          <%= link_to (image_tag user.photo.url(:thumb), :title => user.first_name + ' ' + user.last_name, :alt => user.first_name + ' ' + user.last_name, :class => 'attending_image_leader'), user_path(user_id) %>
         <% end %>
           
         <% @attending.each do |attending| %>
-       
+
           <% if @attending.count > 0 %>
             <%
             @attending_user_id = EventsUser.find(attending).user_id

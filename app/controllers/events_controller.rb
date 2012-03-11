@@ -7,7 +7,7 @@ class EventsController < ApplicationController
  
   def index
     @events = Event.where("date_time > ?", Time.now).order("date_time ASC").paginate(:page => params[:page])
-
+    
     if !current_user
       @events = @events.limit(5)
     end
@@ -93,9 +93,9 @@ class EventsController < ApplicationController
   end
   
   def joiningevents
-    @events = current_user.events.find(:all)    
+    @events = current_user.events.where("date_time > ?", Time.now).order("date_time ASC")    
     
-    @is_empty = false
+    @is_empty = @events.empty?
   end
 end
 
