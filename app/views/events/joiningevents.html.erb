@@ -10,12 +10,22 @@ Daniel Krenmayr, Dimitri Reifschneider
 <% else %>
   
   <h1>Joining Events</h1>
-	
-<%= current_user.id %>
-
-<% @events.each do |event| %>  
-
-    <%= event.event_id %>
-
+    
+    <% @events.each do |event| %>
+    
+    <% user = event.user %>
+      
+    <span class="box"> 
+      <p>
+        In <%= distance_of_time_in_words(Time.now, event.date_time) %> (<%= event.date_time.strftime("%d.%m.%Y") %>)
+        <%= user.first_name %> wants to 
+        <%= link_to event.title, event %>
+        in <%= event.city %>
+        at <%= event.location %> 
+        with <%= event.person_limit %> other goofys
+      </p>
+      <%= link_to 'Show details of this event', event %>
+    </span>
   <% end %>
+		
 <% end %>

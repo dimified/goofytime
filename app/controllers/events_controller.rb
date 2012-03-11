@@ -93,7 +93,9 @@ class EventsController < ApplicationController
   end
   
   def joiningevents
-
+    @events = current_user.events.find(:all)    
+    
+    @is_empty = false
   end
 end
 
