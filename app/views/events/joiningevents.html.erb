@@ -10,10 +10,8 @@ Daniel Krenmayr, Dimitri Reifschneider
 <% else %>
   
   <h1>Joining Events</h1>
-  
-    Current User Id = <%=current_user.id %>
-		
-<% @events.each do |event| %>
+    
+    <% @events.each do |event| %>
     
     <% user = event.user %>
       
@@ -29,4 +27,5 @@ Daniel Krenmayr, Dimitri Reifschneider
       <%= link_to 'Show details of this event', event %>
     </span>
   <% end %>
+		
 <% end %>

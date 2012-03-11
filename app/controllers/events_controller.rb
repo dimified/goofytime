@@ -93,23 +93,8 @@ class EventsController < ApplicationController
   end
   
   def joiningevents
-    #@events = Event.User.find(:all)
-    #@events = Event.where("id = current_user.id", :include => [:user])
-    #@events = Event.where("user_id = ?", current_user.id)
     
-    #the same as: 
-    #@events = Event.find(:all, :include => [:user])
-    #@events = Event.joins("INNER JOIN users ON events.user_id = users.id")
-    #@test = user.events.find(:all)
-    #@events = User.joins("INNER JOIN users ON events_users.user_id = users.id")
-  
-  
-    #@events = Event.where("user_id = ?", current_user.id)
-    #@events = EventsUser.joins("INNER JOIN events ON events.event_id = event_id")
-    
-    #@events = Event.joins("INNER JOIN events_users ON events_users.event_id = event_id").where('event_users.user_id = ?', current_user.id) 
-    
-    #@events = find_by_sql("SELECT * FROM events INNER JOIN events_users ON events.event_id = events_users._event_id") 
+    @events = current_user.events.find(:all)    
     
     @is_empty = false
   end
