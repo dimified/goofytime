@@ -21,6 +21,8 @@ class Event < ActiveRecord::Base
   self.per_page = 10
   
   delegate :first_name, :to => :user
+  delegate :last_name, :to => :user
+  delegate :photo, :to => :user
   
   def owner?(user_id, event_user_id)
     if(user_id == event_user_id)

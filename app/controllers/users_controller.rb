@@ -22,7 +22,7 @@ class UsersController < ApplicationController
   	@user = User.find(params[:id])
 		
     respond_to do |format|
-      format.html # show.html.erb
+      format.html
       format.json { render json: @user }
     end
   end
@@ -31,7 +31,7 @@ class UsersController < ApplicationController
     @user = User.new
 
     respond_to do |format|
-      format.html # new.html.erb
+      format.html 
       format.json { render json: @user }
     end
   end
