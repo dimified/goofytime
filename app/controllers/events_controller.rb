@@ -6,7 +6,7 @@
 class EventsController < ApplicationController
  
   def index
-    @events = Event.where("date_time > ?", Time.now).order("date_time ASC").paginate(:page => params[:page])
+    @events = Event.where("date_time > ?", Time.now.utc).order("date_time ASC").paginate(:page => params[:page])
     
     if !current_user
       @events = @events.limit(5)
@@ -84,16 +84,13 @@ class EventsController < ApplicationController
   end
   
   def feelinggoofy
-    #@events = Event.find(:all, :order => "RAND()", :limit => 1, :conditions => ["user_id != ?", current_user.id])
-    
-    # ACHTUNG RAND!!!!!!!!!!!!!!!!!!!!!!!
-    
-    @events = Event.where("user_id != ?", current_user.id).limit(1)
+    @events = Event.find(:all, :order => "RAND()", :limit => 1, :conditions => ["user_id != ?", current_user.id])
+
     @is_empty = @events.empty?
   end
   
   def joiningevents
-    @events = current_user.events.where("date_time > ?", Time.now).order("date_time ASC")    
+    @events = current_user.events.where("date_time > ?", Time.now.utc).order("date_time ASC")    
     
     @is_empty = @events.empty?
   end

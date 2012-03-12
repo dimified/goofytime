@@ -22,7 +22,7 @@ Daniel Krenmayr, Dimitri Reifschneider
   <% @events.each do |event| %>
     <% user = event.user %>
 
-    <% @number_of_attendies = EventsUser.attending_count(event.id).count %>
+    <% @number_of_attendees = EventsUser.attending_count(event.id).count %>
 
     <span class="box">   
       <p>
@@ -42,8 +42,8 @@ Daniel Krenmayr, Dimitri Reifschneider
       </p>  
 
       <p>
-        <strong><%= user.first_name %></strong> and <strong><%= @number_of_attendies %></strong>
-        <% if @number_of_attendies == 1 %>
+        <strong><%= user.first_name %></strong> and <strong><%= @number_of_attendees %></strong>
+        <% if @number_of_attendees == 1 %>
           Goofy
         <% else %>
           Goofies
